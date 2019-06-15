@@ -3,7 +3,7 @@ var b=[];
 var up=[];
 var arr=[];
 var N=0,T=0;
-
+var ans=[];
 function solve(i,n,s){
 	
 if(n<0||s<0)return 0;
@@ -30,7 +30,7 @@ return dp[i][n][s];
 function print(i,n,s){
 if(!n)return ;
 
-for(var j=0;j<b[i][n][s];j++)console.log(arr[i]);
+for(var j=0;j<b[i][n][s];j++)ans.push(arr[i]);
 
 print(i+1,n-b[i][n][s],s-(b[i][n][s]*arr[i]));
 }
@@ -50,14 +50,14 @@ function RUN(m,n,t){
 	  
 	}
 	
-	for(var i=0;i<arr.length;i++)up[i]=(N*T)/arr[i];
-if(solve(0,N,N*T))
-  print(0,N,N*T);
-else console.log(-1);
+	for(var i=0;i<arr.length;i++)up[i]=(arr[i]>0?(N*T)/arr[i]:N);
+if(solve(0,N,N*T)){
+  print(0,N,N*T);return ans;}
+else return [-1];
 
 
 }
 //Write the test case 
 //RUN(/The array   /,/ the size of the resulted array  /,the target    )
 //eg.RUN([1,2,3],6,2)
-RUN([1,2,3],6,2);
+console.log(RUN([0],5,4));
